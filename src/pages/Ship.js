@@ -1,68 +1,71 @@
-import React from 'react';
-import axios from 'axios';
-import { get } from 'lodash';
-import Gallery from '../components/Gallery';
-import StarRating from '../components/StarRating';
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
-import 'semantic-ui-css/semantic.min.css';
+import React from "react";
+import axios from "axios";
+import { get } from "lodash";
+import Gallery from "../components/Gallery";
+import StarRating from "../components/StarRating";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import "semantic-ui-css/semantic.min.css";
 import "../styles/ship.css";
 import "../styles/commentgroup.css";
-import { Comment, List } from 'semantic-ui-react'
-
-
+import { Comment, List } from "semantic-ui-react";
 
 class Ship extends React.Component {
   state = {
     photoIndex: 0,
     isOpen: false,
     ship: {},
-    text: ''
-  }
-
-
+    text: ""
+  };
 
   componentDidMount() {
-    this.fetchShip()
+    this.fetchShip();
   }
-
 
   fetchShip = async () => {
     const shipId = this.props.match.params.id;
-    const { data } = await axios.get(
-      `http://localhost:4000/ships/${shipId}`,
-      { 'Content-Type': 'application/json', Authorization: sessionStorage.getItem('AUTH_TOKEN') }
-
-    )
-    this.setState({ ship: data })
-  }
-
-
+    const { data } = await axios.get(`/ships/${shipId}`, {
+      "Content-Type": "application/json",
+      Authorization: sessionStorage.getItem("AUTH_TOKEN")
+    });
+    this.setState({ ship: data });
+  };
 
   render() {
-    
     const { ship } = this.state;
-    const allRatings  = ship.reviews && ship.reviews.map(review => {
-      return( 
-        review.rating
-        )
-      })
-    const ratingLength = allRatings && allRatings.length
-    const ratingSum = allRatings && allRatings.reduce((a, b) => a + b, 0)
-    const averageRating = ratingSum / ratingLength 
+    const allRatings =
+      ship.reviews &&
+      ship.reviews.map(review => {
+        return review.rating;
+      });
+    const ratingLength = allRatings && allRatings.length;
+    const ratingSum = allRatings && allRatings.reduce((a, b) => a + b, 0);
+    const averageRating = ratingSum / ratingLength;
     const { ship_images = [] } = ship;
     const { photoIndex, isOpen } = this.state;
-    const mainSrc = get(ship_images, [photoIndex, 'url'], '');
-    const nextSrc = get(ship_images, [(photoIndex + 1) % ship_images.length, 'url'], '')
-    const prevSrc = get(ship_images, [(photoIndex + ship_images.length - 1) % ship_images.length, 'url'], '');
+    const mainSrc = get(ship_images, [photoIndex, "url"], "");
+    const nextSrc = get(
+      ship_images,
+      [(photoIndex + 1) % ship_images.length, "url"],
+      ""
+    );
+    const prevSrc = get(
+      ship_images,
+      [(photoIndex + ship_images.length - 1) % ship_images.length, "url"],
+      ""
+    );
     return (
       <>
         <div className="carousel-wrapper">
           <Gallery key={ship_images.length} shipImages={ship_images} />
           <div className="button-wrapper ">
-            <button type="button" className="btn btn-light" onClick={() => this.setState({ isOpen: true })}>
+            <button
+              type="button"
+              className="btn btn-light"
+              onClick={() => this.setState({ isOpen: true })}
+            >
               View More
-          </button>
+            </button>
             {isOpen && (
               <Lightbox
                 mainSrc={mainSrc}
@@ -71,96 +74,122 @@ class Ship extends React.Component {
                 onCloseRequest={() => this.setState({ isOpen: false })}
                 onMovePrevRequest={() =>
                   this.setState({
-                    photoIndex: (photoIndex + ship_images.length - 1) % ship_images.length,
+                    photoIndex:
+                      (photoIndex + ship_images.length - 1) % ship_images.length
                   })
                 }
                 onMoveNextRequest={() =>
                   this.setState({
-                    photoIndex: (photoIndex + 1) % ship_images.length,
+                    photoIndex: (photoIndex + 1) % ship_images.length
                   })
                 }
               />
-              
-             
-          )}
+            )}
           </div>
         </div>
         <div className="container">
           <div className="ship-description-body">
             <div className="reviews-header">
-              <h1>{ get(ship.cruise_line, "name", "")} {ship.name}</h1>
-            </div> 
+              <h1>
+                {get(ship.cruise_line, "name", "")} {ship.name}
+              </h1>
+            </div>
             <div className="ship-description-items">
               <div className="ship-description-paragraph">
-              <div className="ship-rating-wrapper">
-                <div className="ship-rating-rating"><StarRating value={averageRating} noHover /> </div>
-                <div className="ship-rating-reviews"><p>{ship.reviews && ship.reviews.length} Reviews</p> </div>
-              </div>
-                <div className="ship-description-paragraph-text">{ get(ship, "description", "")}</div>
+                <div className="ship-rating-wrapper">
+                  <div className="ship-rating-rating">
+                    <StarRating value={averageRating} noHover />{" "}
+                  </div>
+                  <div className="ship-rating-reviews">
+                    <p>{ship.reviews && ship.reviews.length} Reviews</p>{" "}
+                  </div>
+                </div>
+                <div className="ship-description-paragraph-text">
+                  {get(ship, "description", "")}
+                </div>
               </div>
               <div className="ship-voyages">
-                <div className="ship-voyages-title"><h2>Cruise Itineraries</h2></div>
+                <div className="ship-voyages-title">
+                  <h2>Cruise Itineraries</h2>
+                </div>
                 <div className="ship-voyages-items">
-                <List>
-                  {ship.voyages && ship.voyages.slice(0, 4).map(voyage => {
-                    return( 
-                      <List.Item>
-                      <List.Header>{voyage.description}</List.Header><p>Ports:  {voyage.ports}</p>Price: ${voyage.price.toLocaleString()}
-                      </List.Item>
-                      )
-                    })
-                  }
-                </List>
+                  <List>
+                    {ship.voyages &&
+                      ship.voyages.slice(0, 4).map(voyage => {
+                        return (
+                          <List.Item>
+                            <List.Header>{voyage.description}</List.Header>
+                            <p>Ports: {voyage.ports}</p>Price: $
+                            {voyage.price.toLocaleString()}
+                          </List.Item>
+                        );
+                      })}
+                  </List>
                 </div>
               </div>
             </div>
-          </div>   
-            <div className="reviews-header">
-               <h2 className="ui header">Reviews</h2>
-            </div>
-                {ship.reviews && ship.reviews.map(review => {
-                  return(
-                    <div className="review-group-body">
-                    <Comment.Group className="review-group">
+          </div>
+          <div className="reviews-header">
+            <h2 className="ui header">Reviews</h2>
+          </div>
+          {ship.reviews &&
+            ship.reviews.map(review => {
+              return (
+                <div className="review-group-body">
+                  <Comment.Group className="review-group">
                     <Comment className="comment-comment">
-    
-                    <Comment.Avatar className="comment-avatar" src={review.user_profile.url} />
-                    <Comment.Content className="comment-content">
-                    <Comment.Author className="comment-author" as='a'>{review.user_profile.first_name}</Comment.Author>
-                    <Comment.Metadata className="comment-metadata">
-                    <div>{review.user_profile.created_at}</div>
-                    </Comment.Metadata>
+                      <Comment.Avatar
+                        className="comment-avatar"
+                        src={review.user_profile.url}
+                      />
+                      <Comment.Content className="comment-content">
+                        <Comment.Author className="comment-author" as="a">
+                          {review.user_profile.first_name}
+                        </Comment.Author>
+                        <Comment.Metadata className="comment-metadata">
+                          <div>{review.user_profile.created_at}</div>
+                        </Comment.Metadata>
 
-                    <Comment.Text className="comment-text"> <StarRating className="stars-comments"value={review.rating} noHover /></Comment.Text>
-                    <Comment.Text className="review-body">{review.body}</Comment.Text>
-                    <p>Username: {review.user_profile.username}</p>
-                    <Comment.Actions>
-                    <Comment.Action className="review-reply">Reply</Comment.Action>
-                    </Comment.Actions>
-                    <Comment.Text><div className="comment-comments">COMMENTS:</div></Comment.Text>
+                        <Comment.Text className="comment-text">
+                          {" "}
+                          <StarRating
+                            className="stars-comments"
+                            value={review.rating}
+                            noHover
+                          />
+                        </Comment.Text>
+                        <Comment.Text className="review-body">
+                          {review.body}
+                        </Comment.Text>
+                        <p>Username: {review.user_profile.username}</p>
+                        <Comment.Actions>
+                          <Comment.Action className="review-reply">
+                            Reply
+                          </Comment.Action>
+                        </Comment.Actions>
+                        <Comment.Text>
+                          <div className="comment-comments">COMMENTS:</div>
+                        </Comment.Text>
 
-
-                    <div className="review-comments">
-                    {
-                      review.comments.map(comment => {
-                        return(
-                        <p>{comment.body}<span>- {comment.user_profile.first_name}</span></p>
-                        )
-                      })
-                    }
-                    </div>
-         
-                    </Comment.Content>
+                        <div className="review-comments">
+                          {review.comments.map(comment => {
+                            return (
+                              <p>
+                                {comment.body}
+                                <span>- {comment.user_profile.first_name}</span>
+                              </p>
+                            );
+                          })}
+                        </div>
+                      </Comment.Content>
                     </Comment>
-                    </Comment.Group>
-                  </div>
-                    )
-                  })
-                } 
+                  </Comment.Group>
+                </div>
+              );
+            })}
         </div>
       </>
-    )
+    );
   }
 }
-export default Ship
-
+export default Ship;

@@ -1,20 +1,22 @@
-import React, { createContext, Component } from 'react';
-import axios from 'axios';
+import React, { createContext, Component } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext({});
 
-
 export class AuthContextProvider extends Component {
-  state = { token: '' }
+  state = { token: "" };
 
   componentDidMount() {
-    this.authenticate()
+    this.authenticate();
   }
 
   authenticate = async () => {
-    const { data } = await axios.post('http://localhost:4000/authenticate', { email: 'example@mail.com', password: '123123123' });
-    this.setState({ token: `Bearer ${data.auth_token}` })
-  }
+    const { data } = await axios.post("/authenticate", {
+      email: "example@mail.com",
+      password: "123123123"
+    });
+    this.setState({ token: `Bearer ${data.auth_token}` });
+  };
 
   render() {
     const { token } = this.state;
@@ -23,6 +25,6 @@ export class AuthContextProvider extends Component {
       <AuthContext.Provider value={{ token }} key={token}>
         {children}
       </AuthContext.Provider>
-    )
+    );
   }
 }
