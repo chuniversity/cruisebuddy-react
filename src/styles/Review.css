@@ -1,79 +1,66 @@
+.f-l {
+  margin-bottom: -10px;
+}
+
 .r-img {
   background-image: url("../images/review-hero.jpg");
-  box-sizing: border-box;
-  height: 900px;
-  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 100px;
+  min-height: 1000px;
 }
-.r-t {
-  height: 200px;
-  color: white;
-  font-family: 'lato', sans-serif;
-  font-size: 24px;
-  line-height: 36px;
-  padding: 135px;
-  margin-left: 80px;
+#container {
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 500px;
+  width: 100%;
+  height: 80%;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 5px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 140, 255, 0.3),
+    rgba(0, 195, 255, 0.3)
+  );
 }
- .m-r-p{
-   padding: 160px; 
-   margin-left: 80px;
- }
-.r-input {
-  width: 382px;
+.overal-rating {
+  display: block;
   height: 50px;
-  padding: 60px;
-  margin-left: ;
+  text-align: center;
+  margin: 30px;
 }
-h5{
-  margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
-}
+
 .star-rating {
-  display:flex;
+  display: flex;
   flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
+  font-size: 1.5em;
+  justify-content: center;
 }
-star-rating label 
-.s-r label:hover,
+star-rating label .s-r label:hover,
 .s-r label:hover ~ label {
   color: blue;
 }
 .star-rating label {
-  color:#ccc;
-  cursor:pointer;
+  color: #ccc;
+  cursor: pointer;
 }
 .noHover:hover {
-  color: #ccc; 
+  color: #ccc;
 }
 .active {
   color: blue !important;
-} 
-.box{
-  display: flex;
-  width: 582px;
-  height: 232px;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
-  padding: 200px;
-  margin: 15px;
 }
-.child--fa-upload{
+
+.thanks-button {
+  text-align: center;
+}
+
+/* .child--fa-upload{
   align-self: flex-start;
   font-size: 100px;
-}
-/* .parent {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-row-gap: 0px;
-}
-.div1 { grid-area: 1 / 1 / 2 / 2; }
-.div2 { grid-area: 1 / 2 / 2 / 3; }
-.div3 { grid-area: 2 / 2 / 3 / 3; }
-.div4 { grid-area: 3 / 2 / 4 / 3; }
-.div5 { grid-area: 3 / 1 / 4 / 2; }
-.div6 { grid-area: 2 / 1 / 3 / 2; } */
+}  */

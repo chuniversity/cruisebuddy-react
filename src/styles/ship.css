@@ -4,31 +4,31 @@
 }
 
 .button-wrapper {
-  position: absolute; 
-  right: 5px; 
+  position: absolute;
+  right: 5px;
   bottom: 5px;
   z-index: 100;
 }
 
 .ship-gallery-wrapper {
   height: 400px;
-
 }
 
 .ship-gallery-image {
-  height: 100%;
-  object-position: 50% 50%;
+  height: 400px;
+  width: 500px;
+  object-fit: cover;
 }
 
 .ship-description-text {
-    height: 500px;
-    border: none;
-    overflow: auto;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    resize: none; 
+  height: 500px;
+  border: none;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
 }
 
 .ship-description-body {
@@ -42,8 +42,27 @@
   padding-bottom: 50px;
   padding-right: 100px;
 }
-.ship-voyages {
-  padding-left: 40px;
+
+@media only screen and (max-width: 600px) {
+  .ship-description-items {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 0px;
+  }
+  .ship-description-paragraph {
+    padding-right: 0px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+  }
+  .ship-voyages {
+    padding-left: 20px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .ship-voyages {
+    padding-left: 40px;
+  }
 }
 
 .ship-description-paragraph {
@@ -54,7 +73,6 @@
   margin-left: auto;
   font-size: 13px;
 }
-
 
 .ship-voyages-title {
   padding-bottom: 20px;
@@ -68,4 +86,25 @@
 
 .ship-rating-reviews {
   padding-left: 10px;
+}
+
+.comment-form {
+  height: 20px;
+}
+
+.ship-page-container {
+  min-height: calc(100vh - 50px);
+}
+
+.review-image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+.stars-comments {
+}
+
+.comment-text {
+  width: 100px;
+  text-align: left;
 }

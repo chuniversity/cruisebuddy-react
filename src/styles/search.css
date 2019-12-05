@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 
 .search-nav-container {
   background-color: #1b77ac;
@@ -11,36 +10,37 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 200px;
-
 }
 .search-filters {
-  text-align:center;
-
+  text-align: center;
 }
 
-
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   margin: 15px;
 }
 
-.search-sort-container{
+.search-sort-container {
   margin-top: 20px;
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 
-.search-sort{
-  font-family: 'lato', sans-serif;  
+.search-sort {
+  font-family: "lato", sans-serif;
   font-size: 14px;
-  font-color: #4E555B;
+  font-color: #4e555b;
 }
 
 .search-image {
-  height:100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.search-input-group{
+.search-input-group {
   padding-top: 100px;
   margin: 0 auto;
   max-width: 600px;
@@ -59,7 +59,7 @@ button, input, optgroup, select, textarea {
   overflow: hidden;
   max-height: 2.5em;
   line-height: 1em;
-  text-decoration: none!important;
+  text-decoration: none !important;
   margin-left: 10px;
 }
 
@@ -69,20 +69,20 @@ button, input, optgroup, select, textarea {
   overflow: hidden;
   max-height: 3.6em;
   line-height: 1.8em;
-  text-decoration: none!important;
-  color: #4E555B;
+  text-decoration: none !important;
+  color: #4e555b;
   padding-bottom: 0px;
 }
 
 .search-title {
-  color: #3A464C;
+  color: #3a464c;
 }
 
 .desc-preview a:hover {
-  text-decoration: none!important;
+  text-decoration: none !important;
 }
 .card a:hover {
-  text-decoration: none!important;
+  text-decoration: none !important;
 }
 
 .noHover {

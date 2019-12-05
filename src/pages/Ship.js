@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { get } from "lodash";
+import { Link } from "react-router-dom";
 import Gallery from "../components/Gallery";
 import StarRating from "../components/StarRating";
 import Lightbox from "react-image-lightbox";
@@ -8,7 +9,7 @@ import "react-image-lightbox/style.css";
 import "semantic-ui-css/semantic.min.css";
 import "../styles/ship.css";
 import "../styles/commentgroup.css";
-import { Comment, List } from "semantic-ui-react";
+import { Comment, List, Form, Button, TextArea } from "semantic-ui-react";
 
 class Ship extends React.Component {
   state = {
@@ -87,7 +88,7 @@ class Ship extends React.Component {
             )}
           </div>
         </div>
-        <div className="container">
+        <div className="container ship-page-container">
           <div className="ship-description-body">
             <div className="reviews-header">
               <h1>
@@ -144,10 +145,11 @@ class Ship extends React.Component {
                       />
                       <Comment.Content className="comment-content">
                         <Comment.Author className="comment-author" as="a">
-                          {review.user_profile.first_name}
+                          {review.user_profile.first_name}{" "}
+                          {review.user_profile.last_name.charAt(0)}
                         </Comment.Author>
                         <Comment.Metadata className="comment-metadata">
-                          <div>{review.user_profile.created_at}</div>
+                          <div>{review.created_at}</div>
                         </Comment.Metadata>
 
                         <Comment.Text className="comment-text">
@@ -161,7 +163,14 @@ class Ship extends React.Component {
                         <Comment.Text className="review-body">
                           {review.body}
                         </Comment.Text>
-                        <p>Username: {review.user_profile.username}</p>
+                        <p>
+                          {review.ship_image ? (
+                            <img
+                              className="review-image"
+                              src={review.ship_image}
+                            />
+                          ) : null}
+                        </p>
                         <Comment.Actions>
                           <Comment.Action className="review-reply">
                             Reply
@@ -174,19 +183,52 @@ class Ship extends React.Component {
                         <div className="review-comments">
                           {review.comments.map(comment => {
                             return (
-                              <p>
-                                {comment.body}
-                                <span>- {comment.user_profile.first_name}</span>
-                              </p>
+                              <Comment>
+                                <Comment.Avatar
+                                  src={comment.user_profile.url}
+                                />
+                                <Comment.Content>
+                                  <Comment.Author as="a">
+                                    {comment.user_profile.first_name}{" "}
+                                    {review.user_profile.last_name.charAt(0)}
+                                  </Comment.Author>
+                                  <Comment.Metadata>
+                                    <div>{comment.created_at}</div>
+                                  </Comment.Metadata>
+                                  <Comment.Text>{comment.body}</Comment.Text>
+                                  <Comment.Actions>
+                                    <Comment.Action>Reply</Comment.Action>
+                                  </Comment.Actions>
+                                </Comment.Content>
+                              </Comment>
                             );
                           })}
                         </div>
                       </Comment.Content>
                     </Comment>
+                    <Form reply>
+                      {/* <Form.TextArea
+                        label="About"
+                        placeholder="Comment on this review..."
+                      /> */}
+
+                      {/* <Button
+                        class="ui button"
+                        size="tiny"
+                        content="Add Reply"
+                        labelPosition="left"
+                        icon="edit"
+                      /> */}
+                    </Form>
                   </Comment.Group>
                 </div>
               );
             })}
+          <div>
+            <Link to="/Review">
+              <Button variant="outline-light btn-sm">Write a Review</Button>
+            </Link>
+          </div>
         </div>
       </>
     );

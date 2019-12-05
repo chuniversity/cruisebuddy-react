@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/Review.css";
@@ -56,6 +56,7 @@ class Review extends React.Component {
         Authorization: this.context.token
       }
     });
+    this.props.history.push("/ReviewThanks");
   };
 
   handleRatingSelection = stateId => val => {
@@ -67,68 +68,84 @@ class Review extends React.Component {
     );
     this.setState({ categories: newCategories, averageRating });
   };
+  redirect() {
+    this.props.history.push("/");
+  }
 
   render() {
     const { averageRating, categories } = this.state;
 
     return (
-      <div>
-        <div className="r-img">
-          <p className="r-t">
-            We'd love to hear your opinion. Your feedback helps fellow cruisers
-            choose the best cruise for their needs. Thank you.{" "}
-          </p>
-          <Form style={{ marginLeft: "80px" }} className="r-input">
-            <div controlId="formGrid">
-              <Form.Label style={{ padding: "1rem" }}>
-                Which ship were you on?
-              </Form.Label>
-              <Form.Control
-                onChange={this.handleInputChange("shipName")}
-                placeholder="Begin typing your ship name…"
-              />
-            </div>
-            <div controlId="formGrid">
-              <Form.Label style={{ padding: "1rem" }}>
-                Which itinerary did you go on?
-              </Form.Label>
-              <Form.Control placeholder="Itinerary" />
-            </div>
-            <div controlId="formGrid">
-              <Form.Label style={{ padding: "1rem" }}>
-                On which dates did you cruise?
-              </Form.Label>
-              <Form.Control type="date" placeholder="" />
-            </div>
-          </Form>
-        </div>
-        <div className="m-r-p">
-          <h4>Choose Overal Rating</h4>
-          <StarRating style={{ height: "32px" }} value={averageRating} />
-          <h5>Rate item by item:</h5>
-          {CATEGORIES.map(({ value, label }) => (
-            <div>
-              <label style={{ font: "lato, sans-serif" }}>{label}</label>
-              <StarRating
-                category={value}
-                value={categories[value]}
-                handleRating={this.handleRatingSelection(value)}
-              />
-            </div>
-          ))}
-          <div>
-            <div>
-              <h5 style={{ padding: "1rem" }}> Write your review:</h5>
-              <textarea
-                style={{ width: "582px", height: "330px" }}
-                aria-label="With textarea"
-              ></textarea>
-            </div>
-            <MyDropzone fileSelectedHandler={this.fileSelectedHandler} />
-            <button onClick={this.handleSubmitReview} class="btn btn-primary">
-              Post Review
-            </button>
+      <div className="r-img">
+        <div id="container">
+          <div className="r-t">
+            <h4
+              style={{
+                padding: "4rem",
+                color: "white",
+                fontFamily: "lato, sans-serif"
+              }}
+            >
+              We'd love to hear your opinion. Your feedback helps fellow
+              cruisers choose the best cruise for their needs. Thank you
+            </h4>
           </div>
+          <Form className="r-input input-group-sm mb-3">
+            <Form.Label className="f-l" style={{ padding: "1rem" }}>
+              Which ship were you on?
+            </Form.Label>
+            <Form.Control
+              style={{ width: "461px" }}
+              onChange={this.handleInputChange("shipName")}
+              placeholder="Begin typing your ship name…"
+            />
+
+            <Form.Label className="f-l" style={{ padding: "1rem" }}>
+              Which itinerary did you go on?
+            </Form.Label>
+            <Form.Control style={{ width: "461px" }} placeholder="Itinerary" />
+
+            <Form.Label className="f-l" style={{ padding: "1rem" }}>
+              On which dates did you cruise?
+            </Form.Label>
+            <Form.Control
+              style={{ width: "461px" }}
+              type="date"
+              placeholder=""
+            />
+
+            <div className="overal-rating">
+              <h4>Choose Overal Rating</h4>
+              <StarRating
+                classname="review-rating"
+                style={{ height: "52px" }}
+                value={averageRating}
+              />
+            </div>
+            <h4 style={{ textAlign: "center" }}>Rate item by item:</h4>
+            {CATEGORIES.map(({ value, label }) => (
+              <div className="overal-rating">
+                <label style={{ font: "lato, sans-serif" }}>{label}</label>
+                <StarRating
+                  classname="review-rating"
+                  category={value}
+                  value={categories[value]}
+                  handleRating={this.handleRatingSelection(value)}
+                />
+              </div>
+            ))}
+          </Form>
+
+          <h4 style={{ textAlign: "center" }}> Write your review:</h4>
+          <textarea
+            style={{ borderRadius: "5px", width: "460px", height: "150px" }}
+            aria-label="With textarea"
+            onChange={this.handleInputChange("reviewBody")}
+          ></textarea>
+          <MyDropzone fileSelectedHandler={this.fileSelectedHandler} />
+          <button onClick={this.handleSubmitReview} class="btn btn-primary">
+            Post Review
+          </button>
         </div>
       </div>
     );

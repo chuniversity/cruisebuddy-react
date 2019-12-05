@@ -9,15 +9,13 @@ import "../styles/search.css";
 class Search extends Component {
   state = {
     ships: [],
-    query: "",
-    pageNumber: 1
+    query: ""
   };
   componentDidMount() {
     this.fetchShips();
   }
   fetchShips = async () => {
-    const { pageNumber } = this.state;
-    const { data } = await axios.get(`/ships?page=${pageNumber}`, {
+    const { data } = await axios.get(`/ships/`, {
       "Content-Type": "application/json",
       Authorization: sessionStorage.getItem("AUTH_TOKEN")
     });
@@ -41,7 +39,6 @@ class Search extends Component {
     this.props.history.push(`/search/${query}`);
     window.location.reload(false);
   };
-  handleFilterChange = field => e => this.setState({ [field]: e.target.value });
 
   render() {
     const { ships } = this.state;
@@ -55,6 +52,7 @@ class Search extends Component {
               onSubmit={this.handleSubmit}
             >
               <input
+                style={{ borderRadius: "50px 0 0 50px", backgroundColor: "#" }}
                 type="text"
                 className="form-control"
                 placeholder="Search for Reviews"
@@ -64,11 +62,12 @@ class Search extends Component {
               />
               <div className="input-group-append">
                 <button
+                  style={{ borderRadius: " 0 50px 50px 0" }}
                   className="btn btn-primary"
                   type="button"
                   onClick={this.handleSubmit}
                 >
-                  Search
+                  <i class="fas fa-search"></i>
                 </button>
               </div>
             </form>
