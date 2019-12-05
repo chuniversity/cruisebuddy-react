@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400i&display=swap');
-.navbar-brand {	
-  height: 23px;	
-  width: 111px;	
-  color: #000000;	
-  font-family: 'lato', sans-serif; 
+@import url("https://fonts.googleapis.com/css?family=Lato:400i&display=swap");
+.navbar-brand {
+  height: 23px;
+  width: 111px;
+  color: #000000;
+  font-family: "lato", sans-serif;
   font-style: italic;
-  font-size: 20px;	
-  line-height: 23px;}
-  /* NAV BAR */
+  font-size: 20px;
+  line-height: 23px;
+}
+/* NAV BAR */
 .navbar {
   position: fixed;
   height: 60px;
@@ -20,10 +21,11 @@
   background-color: #064064;
 }
 .nav-text-right {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
 }
-.navbar-r, .navbar-l {
+.navbar-r,
+.navbar-l {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -42,7 +44,7 @@
 }
 .logo {
   align-content: center;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 21px;
   text-decoration: none;
   color: white;
@@ -69,33 +71,43 @@
   bottom: 0;
   height: 50px;
   width: 100%;
-  background-color: #BFEBFF;
+  background-color: #064064;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-
-  .cruisebuddy {
+.cruisebuddy {
   display: flex;
   color: white;
   font-family: "Raleway', sans-serif";
   font-size: 20px;
   padding: 30px;
-  margin-left:150px;  
+  margin-left: 150px;
 }
-.copyright{
+.copyright {
   text-align: center;
-  color: #6C94A9;
+  color: #6c94a9;
   font-family: ".SF NS Display";
   font-size: 14px;
 }
-.main-footer{
-     justify-content: space-around;
-     display: flex; 
-     margin: 30px;
-     margin-left: 130px;
-     width: 600px;
-} 
+.main-footer {
+  justify-content: space-around;
+  display: flex;
+  margin: 30px;
+  margin-left: 130px;
+  width: 600px;
+}
 /* End Footer */
+
+/* mobile */
+
+@media only screen and (max-width: 601px) {
+  .find-a-cruise {
+    display: none;
+  }
+  .log-in {
+    display: none;
+  }
+}

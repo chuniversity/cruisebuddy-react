@@ -3,7 +3,7 @@ const zip = (...[first, ...arrays]) =>
   first.map((value, i) =>
     arrays.reduce((acc, array) => [...acc, array[i]], [value])
   );
-const BASEURL = "http://localhost:4000", //&& "http://zip.thruhere.net:3001",
+const BASEURL = "", //&& "http://zip.thruhere.net:3001",
   endpoints = [
     "/authenticate",
     "/comments",
@@ -68,7 +68,7 @@ var setToken = (key, url, credentials, component) =>
         return STATE.token;
       })
       .then(token => {
-        sessionStorage.setItem('AUTH_TOKEN', token)
+        sessionStorage.setItem("AUTH_TOKEN", token);
         axios
           .get(url, {
             headers: {

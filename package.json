@@ -19,6 +19,7 @@
     "react-dropzone": "^10.2.1",
     "react-id-swiper": "^2.4.0",
     "react-image-lightbox": "^5.1.1",
+    "react-infinite-scroller": "^1.2.4",
     "react-paginate": "^6.3.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
@@ -39,6 +40,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "https://intense-sands-41934.herokuapp.com",
   "browserslist": {
     "production": [
       ">0.2%",
